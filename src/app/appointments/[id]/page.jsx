@@ -10,7 +10,7 @@ import {
 } from "react-icons/fa6";
 import { TbBuildingHospital } from "react-icons/tb";
 
-const doctorsDetialsPage = async ({params}) => {
+const appointmentsDetialsPage = async ({params}) => {
 
 
     const { id } = await params;
@@ -148,4 +148,4 @@ const doctorsDetialsPage = async ({params}) => {
     );
 };
 
-export default doctorsDetialsPage;
+export default appointmentsDetialsPage;

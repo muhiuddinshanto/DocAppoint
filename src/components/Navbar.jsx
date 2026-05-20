@@ -1,14 +1,33 @@
 "use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { authClient, useSession } from "@/lib/auth-client";
+import { useRouter } from "next/navigation";
 
 // ✅ Demo user state — replace with real auth (NextAuth / Firebase / JWT etc.)
 const DEMO_USER = null; // Set to { name: "Rafi", image: "/avatar.jpg" } to test logged-in state
 
 export default function Navbar() {
-  const [user, setUser] = useState(DEMO_USER);
+  // const [user, setUser] = useState(DEMO_USER);
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+
+
+    const userData = authClient.useSession();
+    const user = userData.data?.user;
+    console.log(user);
+    
+  
+
+
+
+  const handleSingout = async () => {
+        await authClient.signOut();
+        
+    }
+
+
+
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -19,7 +38,6 @@ export default function Navbar() {
   const navLinks = [
     { href: "/", label: "Home" },
     { href: "/appointments", label: "All Appointments" },
-    { href: "/doctors", label: "Doctors" },
     { href: "/dashboard", label: "Dashboard", private: true },
   ];
 
@@ -77,7 +95,7 @@ export default function Navbar() {
                   <span className="text-sm font-medium text-gray-700">{user.name}</span>
                 </div>
                 <button
-                  onClick={() => setUser(null)}
+                  onClick={handleSingout}
                   className="px-4 py-2 text-sm font-medium text-red-600 border border-red-200 rounded-lg hover:bg-red-50 transition-colors"
                 >
                   Logout

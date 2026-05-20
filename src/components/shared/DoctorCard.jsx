@@ -1,21 +1,14 @@
 import Link from "next/link";
 import { FaLocationDot, FaRegClock, FaStar, FaUserGraduate } from "react-icons/fa6";
 
-const getDoctorId = (doctor) => doctor?.id || doctor?._id;
 
-const getDoctorFee = (fee) => {
-  if (!fee) return "Consultation fee available on details";
-  return typeof fee === "number" ? `৳${fee}` : fee;
-};
 
-const getFirstSlot = (availability) => {
-  if (Array.isArray(availability) && availability.length > 0) {
-    return availability[0];
-  }
-  return availability || "Schedule available on details";
-};
+
+
 
 const DoctorCard = ({ doctor }) => {
+  
+  
   return (
     <article className="group flex h-full flex-col overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl">
       
@@ -90,7 +83,7 @@ const DoctorCard = ({ doctor }) => {
           <p className="flex items-center gap-3">
             <FaRegClock className="text-cyan-500 shrink-0" />
             <span className="text-slate-700 font-medium">
-              Next Slot: {getFirstSlot(doctor.availability)}
+              Next Slot: {doctor.availability}
             </span>
           </p>
         </div>
@@ -102,7 +95,7 @@ const DoctorCard = ({ doctor }) => {
               Consultation Fee
             </p>
             <p className="mt-1 text-xl font-black text-slate-950">
-              {getDoctorFee(doctor.fee)}
+              {doctor.fee}
             </p>
           </div>
           <Link
