@@ -17,7 +17,7 @@ export default function Loading() {
 
             {/* লোডিং টেক্সট */}
             <div className="mt-8 space-y-2">
-                <h2 className="text-xl font-bold tracking-wide text-slate-800 animate-pulse">
+                <h2 className="text-xl font-bold tracking-wide text-slate-800 dark:text-slate-100 animate-pulse">
                     DocTime
                 </h2>
                 <p className="text-sm font-medium tracking-wider text-slate-400 uppercase">

@@ -42,8 +42,8 @@ export function AppointDeleteModal({ booking, handleDeleteState }) {
 
       <AlertDialog.Backdrop>
         <AlertDialog.Container placement="auto">
-          <AlertDialog.Dialog className="sm:max-w-[400px] overflow-hidden rounded-2xl bg-white dark:bg-slate-900">
-            <AlertDialog.CloseTrigger />
+          <AlertDialog.Dialog className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-xl dark:border-white/10 dark:bg-slate-900 sm:max-w-[400px]">
+            <AlertDialog.CloseTrigger className="text-slate-400 transition hover:text-slate-600 dark:hover:text-white" />
 
             <AlertDialog.Header className="pb-2">
               <AlertDialog.Icon status="danger" />
@@ -64,14 +64,14 @@ export function AppointDeleteModal({ booking, handleDeleteState }) {
               <Button
                 onClick={() => setIsOpen(false)}
                 variant="tertiary"
-                className="w-full"
+                className="w-full rounded-xl border border-slate-200 bg-white font-bold text-slate-700 hover:bg-slate-50 dark:border-white/10 dark:bg-white/5 dark:text-slate-200 dark:hover:bg-white/10"
               >
                 Cancel
               </Button>
               <Button
                 onClick={handleDelete}
                 variant="danger"
-                className="w-full bg-red-600 font-bold"
+                className="w-full rounded-xl bg-red-600 font-bold text-white hover:bg-red-700"
               >
                 Delete
               </Button>

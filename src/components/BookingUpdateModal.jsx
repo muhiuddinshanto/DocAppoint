@@ -9,6 +9,8 @@ import toast from "react-hot-toast";
 const BookingUpdateModal = ({ booking, onUpdate }) => {
 
     const [isOpen, setIsOpen] = useState(false); 
+    const labelClass = "mb-1 block text-sm font-semibold text-slate-700 dark:text-slate-200";
+    const inputClass = "w-full rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm text-slate-800 outline-none transition focus:border-teal-500 dark:border-white/10 dark:bg-slate-800 dark:text-white dark:placeholder:text-slate-500";
 
    
     const convertTo12Hour = (time24) => {
@@ -41,14 +43,13 @@ const BookingUpdateModal = ({ booking, onUpdate }) => {
         });
 
         if (res.ok) {
-            const data = await res.json();
+            await res.json();
             toast.success("Appointment updated successfully!");
 
             setIsOpen(false); 
             const updatedBooking = { ...booking, ...formValues };
             onUpdate(updatedBooking);
         } else {
-            const errorText = await res.text();
             toast.error("Failed to update appointment.");
         }
     };
@@ -75,7 +76,7 @@ const BookingUpdateModal = ({ booking, onUpdate }) => {
            
             <Modal isOpen={isOpen} onOpenChange={setIsOpen}>
                 <Modal.Trigger>
-                    <button className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 px-4 py-2.5 text-sm font-bold text-slate-700 transition active:scale-98 shadow-xs cursor-pointer">
+                    <button className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-bold text-slate-700 transition hover:bg-slate-50 dark:border-white/10 dark:bg-white/5 dark:text-slate-200 dark:hover:bg-white/10">
                         <FaPen className="text-xs" />
                         Update
                     </button>
@@ -83,20 +84,19 @@ const BookingUpdateModal = ({ booking, onUpdate }) => {
 
                 <Modal.Backdrop>
                     <Modal.Container placement="auto">
-                        <Modal.Dialog className="sm:max-w-md overflow-hidden rounded-2xl">
-                            <Modal.CloseTrigger />
+                        <Modal.Dialog className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-xl dark:border-white/10 dark:bg-slate-900 sm:max-w-md">
+                            <Modal.CloseTrigger className="text-slate-400 transition hover:text-slate-600 dark:hover:text-white" />
 
                             <Modal.Header className="pb-2">
-                                <Modal.Heading className="text-xl font-bold text-[#0f2942]">
+                                <Modal.Heading className="text-xl font-bold text-slate-900 dark:text-white">
                                     Update Appointment
                                 </Modal.Heading>
                             </Modal.Header>
 
                             <Modal.Body className="p-6 pt-2">
-                                <Surface variant="default" className="border-none p-0 shadow-none bg-transparent">
+                                <Surface variant="default" className="border-none bg-transparent p-0 shadow-none">
                                     <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
 
-                                        {/* Doctor Field */}
                                         <TextField
                                             defaultValue={booking?.doctorName}
                                             isReadOnly
@@ -104,62 +104,56 @@ const BookingUpdateModal = ({ booking, onUpdate }) => {
                                             name="doctorName"
                                             variant="secondary"
                                         >
-                                            <Label className="text-sm font-semibold text-[#0f2942] mb-1 block">Doctor</Label>
-                                            <Input className="w-full px-4 py-2.5 rounded-xl border-none bg-[#e8f4f8] text-slate-700 font-medium focus:outline-none" />
+                                            <Label className={labelClass}>Doctor</Label>
+                                            <Input className={`${inputClass} cursor-not-allowed bg-slate-50 text-slate-500 dark:bg-slate-800/70 dark:text-slate-300`} />
                                         </TextField>
 
-                                        {/* Patient Name */}
                                         <TextField
                                             defaultValue={booking?.patientName}
                                             className="w-full"
                                             name="patientName"
                                             variant="secondary"
                                         >
-                                            <Label className="text-sm font-semibold text-[#0f2942] mb-1 block">Patient Name</Label>
-                                            <Input placeholder="Enter patient name" className="w-full px-4 py-2.5 rounded-xl text-slate-700" />
+                                            <Label className={labelClass}>Patient Name</Label>
+                                            <Input placeholder="Enter patient name" className={inputClass} />
                                         </TextField>
 
-                                        {/* Date and Time */}
                                         <div className="grid grid-cols-2 gap-3">
-                                            {/* Date Field */}
                                             <div className="flex flex-col gap-1 w-full">
-                                                <Label className="text-sm font-semibold text-[#0f2942] mb-1">Date</Label>
+                                                <Label className={labelClass}>Date</Label>
                                                 <input
                                                     type="date"
                                                     name="appointmentDate"
                                                     defaultValue={booking?.appointmentDate}
-                                                    className="w-full border border-slate-200 rounded-xl px-3 py-1.5 bg-white text-slate-800 focus:border-[#00b2b2] outline-none transition text-sm h-11"
+                                                    className={`${inputClass} h-11 dark:[color-scheme:dark]`}
                                                 />
                                             </div>
 
-                                            {/* Time Field */}
                                             <div className="flex flex-col gap-1 w-full">
-                                                <Label className="text-sm font-semibold text-[#0f2942] mb-1">Time *</Label>
+                                                <Label className={labelClass}>Time *</Label>
                                                 <input
                                                     type="time"
                                                     name="appointmentTime"
                                                     defaultValue={defaultTimeValue}
-                                                    className="w-full border border-slate-200 rounded-xl px-3 py-1.5 bg-white text-slate-800 focus:border-[#00b2b2] outline-none transition text-sm h-11 cursor-pointer"
+                                                    className={`${inputClass} h-11 cursor-pointer dark:[color-scheme:dark]`}
                                                     required
                                                 />
                                             </div>
                                         </div>
 
-                                        {/* Reason Field */}
                                         <TextField
                                             defaultValue={booking?.symptoms}
                                             className="w-full"
                                             name="symptoms"
                                             variant="secondary"
                                         >
-                                            <Label className="text-sm font-semibold text-[#0f2942] mb-1 block">Reason</Label>
-                                            <Input placeholder="Enter reason" className="w-full px-4 py-2.5 rounded-xl text-slate-700" />
+                                            <Label className={labelClass}>Reason</Label>
+                                            <Input placeholder="Enter reason" className={inputClass} />
                                         </TextField>
 
-                                        {/* Submit Button */}
                                         <Button
                                             type="submit" 
-                                            className="w-full bg-[#00b2b2] hover:bg-[#009999] text-white font-bold py-3 rounded-xl transition-colors mt-2 shadow-sm text-base h-12"
+                                            className="mt-2 h-12 w-full rounded-xl bg-teal-600 py-3 text-base font-bold text-white shadow-sm transition-colors hover:bg-teal-700"
                                         >
                                             Save Changes
                                         </Button>

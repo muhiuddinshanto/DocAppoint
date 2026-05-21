@@ -9,6 +9,8 @@ import toast from "react-hot-toast";
 export function ProfileUpdateModal({ user }) {
 
     const [isOpen, setIsOpen] = useState(false);
+    const labelClass = "text-sm font-semibold text-slate-700 dark:text-slate-200";
+    const inputClass = "w-full rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm text-slate-800 outline-none transition focus:border-teal-500 dark:border-white/10 dark:bg-slate-800 dark:text-white dark:placeholder:text-slate-500";
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -36,7 +38,7 @@ export function ProfileUpdateModal({ user }) {
            
             <button
                 onClick={() => setIsOpen(true)}
-                className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-[#00a896] hover:bg-[#009485] py-3 text-sm font-bold text-white shadow-xs transition duration-200 active:scale-98 cursor-pointer"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-teal-600 py-3 text-sm font-bold text-white shadow-sm transition duration-200 hover:bg-teal-700"
             >
                 <FaPen className="text-xs" />
                 Update Profile
@@ -46,16 +48,14 @@ export function ProfileUpdateModal({ user }) {
             <Modal isOpen={isOpen} onOpenChange={setIsOpen}>
                 <Modal.Backdrop>
                     <Modal.Container placement="auto">
-                        <Modal.Dialog className="sm:max-w-md">
-                            <Modal.CloseTrigger />
+                        <Modal.Dialog className="rounded-2xl border border-slate-200 bg-white shadow-xl dark:border-white/10 dark:bg-slate-900 sm:max-w-md">
+                            <Modal.CloseTrigger className="text-slate-400 transition hover:text-slate-600 dark:hover:text-white" />
                             <Modal.Header>
-                                <Modal.Heading>Update Profile</Modal.Heading>
+                                <Modal.Heading className="text-xl font-bold text-slate-900 dark:text-white">Update Profile</Modal.Heading>
                             </Modal.Header>
                             <Modal.Body className="p-6">
-                                <Surface variant="default">
+                                <Surface variant="default" className="border-none bg-transparent p-0 shadow-none">
                                     <form className="flex flex-col gap-4" onSubmit={onSubmit}>
-                                        
-                                        
                                         <TextField
                                             defaultValue={user?.name || ""}
                                             className="w-full" 
@@ -63,11 +63,10 @@ export function ProfileUpdateModal({ user }) {
                                             type="text" 
                                             variant="secondary"
                                         >
-                                            <Label>Name</Label>
-                                            <Input />
+                                            <Label className={labelClass}>Name</Label>
+                                            <Input className={inputClass} />
                                         </TextField>
-                                        
-                                        
+
                                         <TextField
                                             defaultValue={user?.image || ""}
                                             className="w-full" 
@@ -75,14 +74,14 @@ export function ProfileUpdateModal({ user }) {
                                             type="url" 
                                             variant="secondary"
                                         >
-                                            <Label>Photo URL</Label>
-                                            <Input placeholder="https://..." />
+                                            <Label className={labelClass}>Photo URL</Label>
+                                            <Input placeholder="https://..." className={inputClass} />
                                         </TextField>
 
                                         <Modal.Footer>
                                             <button
                                                 type="submit" 
-                                                className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-[#00a896] hover:bg-[#009485] py-3 text-sm font-bold text-white shadow-xs transition duration-200 active:scale-98 cursor-pointer"
+                                                className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-teal-600 py-3 text-sm font-bold text-white shadow-sm transition duration-200 hover:bg-teal-700"
                                             >
                                                 Save
                                             </button>
