@@ -1,10 +1,10 @@
 <div align="center">
 
-# 🩺 DocTime
+# 🩺 DocTime – Doctor Appointment Booking Platform
 
-**A modern full-stack doctor appointment booking platform**
+A modern full-stack doctor appointment booking system where patients can browse doctors, view details, and book appointments securely with robust authentication.
 
-DocTime lets patients browse doctors, view profiles, book appointments, and authenticate securely — all in one clean, responsive interface.
+[**🌐 Live Site**](https://doc-appoint-omega.vercel.app) • [**💻 Client Repo**](https://github.com/muhiuddinshanto/DocAppoint) • [**🖥️ Server Repo**](https://github.com/muhiuddinshanto/DocAppoint_server)
 
 </div>
 
@@ -12,116 +12,116 @@ DocTime lets patients browse doctors, view profiles, book appointments, and auth
 
 ## ✨ Features
 
-### 🔐 Authentication
-- Email & password login / registration
-- Google OAuth
-- JWT-based session management via **Better Auth**
-- Middleware-protected routes with automatic redirect
-
-### 👨‍⚕️ Doctors
-- Browse all doctors with card-based layout
-- Search by name or specialty (MongoDB regex)
-- Detailed doctor profile pages with dynamic SEO metadata
-
-### 📅 Appointments
-- Book, update, and cancel appointments
-- View all appointments tied to the logged-in user
-
-### 👤 Profile
-- Update display name and profile photo
-- Real-time UI updates with a clean modal interface
-
-### 🎨 UI & UX
-- Fully responsive — mobile, tablet, desktop
-- Dark / Light theme toggle (persisted in localStorage)
-- Smooth animations, HeroUI modals, Swiper testimonial slider
+- **🔐 Secure Authentication** — Powered by **Better Auth** (JWT + Google OAuth) for seamless access.
+- **👨‍⚕️ Dynamic Search & Filter** — Browse doctors with real-time search by **name** and **specialty**.
+- **📄 Detailed Doctor Profiles** — Dedicated page for each doctor with full credentials and info.
+- **📅 Appointment Management** — Full CRUD — patients can **Book, Update, and Delete** appointments.
+- **👤 Personalized Dashboard** — Dedicated space featuring **My Bookings** and **My Profile**.
+- **🖼️ Interactive Profile Update** — Instant UI updates using a smooth modal system.
+- **🌙 Dark / Light Mode** — Persistent theme toggle stored in `localStorage`.
+- **🎠 Modern Carousel** — Integrated **Swiper.js** for an elegant testimonial slider.
+- **⚡ Fully Responsive** — Optimized for mobile, tablet, and desktop.
+- **🔔 Smart Notifications** — Clean **React Hot Toast** popups instead of browser alerts.
 
 ---
 
 ## 🛠️ Tech Stack
 
-| Layer | Technologies |
-|---|---|
-| **Frontend** | Next.js 16, React 19, Tailwind CSS, HeroUI, Swiper.js |
-| **Backend** | Express.js, MongoDB |
-| **Auth** | Better Auth (JWT plugin, Google OAuth, MongoDB adapter) |
-| **Utilities** | React Icons, React Hot Toast, JOSE |
+| Frontend | Backend |
+| :--- | :--- |
+| **Framework:** Next.js 16 (App Router) & React 19 | **Environment:** Node.js & Express.js |
+| **Styling:** Tailwind CSS & HeroUI | **Database:** MongoDB (Native Driver) |
+| **Icons & Slides:** React Icons & Swiper.js | **Auth Security:** JWT Authentication (JOSE) |
+| **Notifications:** React Hot Toast | **Middleware:** CORS, Dotenv |
 
 ---
 
 ## 📂 Project Structure
 
-```
+```text
 src/
 ├── app/
-│   ├── login/
-│   ├── register/
+│   ├── (auth)/
 │   ├── doctors/
 │   ├── dashboard/
+│   ├── appointments/
 │   └── profile/
 ├── components/
-│   ├── Modal/
 │   ├── Navbar/
+│   ├── Hero/
+│   ├── DoctorCard/
 │   ├── Testimonials/
 │   └── ProfileUpdateModal/
-├── context/
-│   └── ThemeProvider/
+├── lib/
+│   ├── auth-client.js
+│   └── auth.js
 ├── data/
 │   └── data.js
-├── lib/
-│   ├── auth.js
-│   └── auth-client.js
-└── proxy.js
+└── context/
+    └── ThemeProvider.jsx
 ```
 
 ---
 
 ## 🚀 Getting Started
 
-### 1. Clone the repository
+### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/muhiuddinshanto/DocAppoint
-cd docappoint
+git clone https://github.com/muhiuddinshanto/DocAppoint.git
+cd DocAppoint
 ```
 
-### 2. Install dependencies
+### 2. Install Dependencies
 
 ```bash
-# Frontend
+# Client
 npm install
 
-# Backend
+# Server
 cd server && npm install
 ```
 
+### 3. Setup Environment Variables
 
-### 3. Run the project
+**Client** — `.env.local`
+
+```env
+NEXT_PUBLIC_API=http://localhost:5000
+BETTER_AUTH_URL=http://localhost:3000
+BETTER_AUTH_SECRET=your_better_auth_secret_here
+```
+
+**Server** — `.env`
+
+```env
+MONGODB_URI=your_mongodb_connection_string
+PORT=5000
+CLIENT_URI=http://localhost:3000
+```
+
+### 4. Run the Project
 
 ```bash
-# Frontend
+# Frontend (main root folder)
 npm run dev
 
-# Backend
+# Backend (server folder)
 nodemon index.js
 ```
 
 ---
 
-## 🎯 Roadmap
+## 🧠 Future Improvements
 
-- [ ] Payment integration
-- [ ] Video consultation
-- [ ] Admin dashboard
-- [ ] Doctor dashboard
-- [ ] Email notifications & appointment reminders
-- [ ] Real-time chat
-- [ ] Prescription system
+- **📹 Video Consultation** — Integrated video calling for remote medical checkups.
+- **💳 Payment Gateway** — Seamless payment integration (SSLCommerz / Stripe).
+- **🩺 Doctor Dashboard** — Separate portal for doctors to manage schedules and patients.
+- **🔔 Reminders** — Auto-generated Email/SMS reminders before appointments.
+- **💬 Real-time Chat** — Live messaging between doctors and patients.
 
 ---
 
 ## 👨‍💻 Author
 
-Developed with ❤️ by **MuhiuddinShanto**
-
----
+Developed with ❤️ by **Mohiuddin Shanto**
