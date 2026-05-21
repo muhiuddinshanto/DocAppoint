@@ -27,8 +27,7 @@ export function ProfileUpdateModal({ user }) {
             setIsOpen(false); 
             
         } catch (error) {
-            console.error("Update failed:", error);
-            alert("Profile update failed. Please try again.");
+            toast.error("Failed to update profile.");
         } 
     };
 

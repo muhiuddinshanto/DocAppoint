@@ -21,13 +21,13 @@ export default function CTASection() {
             </p>
             <div className="flex flex-wrap justify-center gap-4 pt-2">
               <Link
-                href="/register"
+                href="/appointments"
                 className="px-8 py-4 bg-white text-teal-700 font-bold text-sm rounded-xl hover:bg-teal-50 transition-colors shadow-lg"
               >
                 Get Started — It&apos;s Free
               </Link>
               <Link
-                href="/doctors"
+                href="/appointments"
                 className="px-8 py-4 bg-white/10 border border-white/30 text-white font-bold text-sm rounded-xl hover:bg-white/20 transition-colors backdrop-blur-sm"
               >
                 Browse Doctors

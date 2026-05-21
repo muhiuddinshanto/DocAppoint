@@ -8,7 +8,7 @@ export default function HeroSection() {
   const handleSearch = (e) => {
     e.preventDefault();
     if (searchQuery.trim()) {
-      window.location.href = `/doctors?search=${encodeURIComponent(searchQuery)}`;
+      window.location.href = `/appointments?search=${encodeURIComponent(searchQuery)}`;
     }
   };
 
@@ -87,7 +87,7 @@ export default function HeroSection() {
             {/* CTA Buttons */}
             <div className="flex flex-wrap gap-4">
               <Link
-                href="/doctors"
+                href="/appointments"
                 className="px-7 py-3.5 bg-gradient-to-r from-teal-500 to-cyan-500 text-white font-semibold rounded-xl hover:opacity-90 transition-all hover:scale-105 shadow-xl shadow-teal-900/50"
               >
                 Find Doctors

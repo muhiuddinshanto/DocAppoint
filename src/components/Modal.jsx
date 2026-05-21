@@ -2,6 +2,7 @@
 
 import { authClient } from "@/lib/auth-client";
 import { Button, Input, Label, Modal, TextField } from "@heroui/react";
+import toast from "react-hot-toast";
 import { FaCalendarCheck } from "react-icons/fa6";
 
 export function ModalComponent({ doctor }) {
@@ -41,11 +42,11 @@ export function ModalComponent({ doctor }) {
       const data = await res.json();
       
       if (data.insertedId) {
-        alert("Appointment booked successfully!");
+        toast.success("Appointment booked successfully!");
         
       }
     } catch (error) {
-      console.error("Error submitting appointment:", error);
+      toast.error("Failed to book appointment. Please try again.");
     }
   };
 

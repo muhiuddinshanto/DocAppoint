@@ -2,6 +2,7 @@
 import React from "react";
 import { Button, Card, FieldError, Form, Input, Label, TextField } from "@heroui/react";
 import { authClient } from "@/lib/auth-client";
+import toast from "react-hot-toast";
 
 
 const LoginPage = () => {
@@ -22,12 +23,10 @@ const LoginPage = () => {
 
         })
         if (error) {
-            console.error("Login Error:", error);
-            alert(`Login failed: ${error.message}`);
+            toast.error(`Login failed: ${error.message}`);
         }
         if (data) {
-            console.log("Login Successful:", data);
-            alert("Login successful! Redirecting to homepage...");
+            toast.success("Login successful! Redirecting to homepage...");
 
 
 

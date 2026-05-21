@@ -3,6 +3,7 @@ import React from "react";
 import { Button, Card, FieldError, Form, Input, Label, TextField } from "@heroui/react";
 import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 const RegisterPage = () => {
 
@@ -32,12 +33,12 @@ const RegisterPage = () => {
         })
 
         if (error) {
-            console.error("Registration Error:", error);
-            alert(`Registration failed: ${error.message}`);
+            
+            toast.error(`Registration failed: ${error.message}`);
         }
         if (data) {
             console.log("Registration Successful:", data);
-            alert("Registration successful! Please check your email to verify your account.");
+            toast.success("Registration successful! Please check your email to verify your account.");
             router.push("/");
         }
     }

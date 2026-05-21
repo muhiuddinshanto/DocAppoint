@@ -2,19 +2,20 @@
 import React, { useEffect, useState } from "react";
 import { Button, Input, Label, Modal, Surface, TextField } from "@heroui/react";
 import { FaPen } from "react-icons/fa6";
+import toast from "react-hot-toast";
 
 
 
 const BookingUpdateModal = ({ booking, onUpdate }) => {
 
     const [isMounted, setIsMounted] = useState(false);
-    const [isOpen, setIsOpen] = useState(false); // 🎯 মডাল ওপেন/ক্লোজ কন্ট্রোল করার জন্য স্টেট
+    const [isOpen, setIsOpen] = useState(false); 
 
     useEffect(() => {
         setIsMounted(true);
     }, []);
 
-    // ২৪ ঘণ্টার সময়কে আবার ১২ ঘণ্টার ফরমেটে নেওয়ার ফাংশন
+   
     const convertTo12Hour = (time24) => {
         if (!time24) return "";
         let [hours, minutes] = time24.split(":");
@@ -46,18 +47,18 @@ const BookingUpdateModal = ({ booking, onUpdate }) => {
 
         if (res.ok) {
             const data = await res.json();
-            console.log("Success:", data);
+            toast.success("Appointment updated successfully!");
 
-            setIsOpen(false); // 🎯 ১. ডেটা সফলভাবে আপডেট হলে মডালটি বন্ধ হবে
+            setIsOpen(false); 
             const updatedBooking = { ...booking, ...formValues };
             onUpdate(updatedBooking);
         } else {
             const errorText = await res.text();
-            console.error("Server Error:", errorText);
+            toast.error("Failed to update appointment.");
         }
     };
 
-    // ডাটাবেজের ১২ ঘণ্টার ফরমেটকে টাইম পিকারের জন্য ২৪ ঘণ্টা করার ফাংশন
+    
     const convertTo24Hour = (timeStr) => {
         if (!timeStr) return "";
         const time = timeStr.includes(" - ") ? timeStr.split(" - ")[0].trim() : timeStr.trim();
@@ -78,7 +79,7 @@ const BookingUpdateModal = ({ booking, onUpdate }) => {
 
     return (
         <>
-            {/* 🎯 মডালের স্টেট এখানে বাইন্ড করা হলো */}
+           
             <Modal isOpen={isOpen} onOpenChange={setIsOpen}>
                 <Modal.Trigger>
                     <button className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 px-4 py-2.5 text-sm font-bold text-slate-700 transition active:scale-98 shadow-xs cursor-pointer">
