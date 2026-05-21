@@ -46,3 +46,8 @@ img {
 ::selection {
   background: rgba(20, 184, 166, 0.25);
 }
+
+
+.testimonial-swiper .swiper-pagination-bullet-active {
+     background: #0f766e !important; /* Tailwind's teal-700 */
+   }
