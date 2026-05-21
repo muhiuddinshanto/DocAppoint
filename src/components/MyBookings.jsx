@@ -1,15 +1,13 @@
 "use client";
 import { appointmentsById } from "@/data/data";
 import { authClient } from "@/lib/auth-client";
-import { Book } from "@gravity-ui/icons";
 import React, { useEffect, useState } from "react";
 import {
   FaUser,
   FaCalendarDays,
   FaClock,
   FaFileLines,
-  FaPen,
-  FaTrashCan
+
 } from "react-icons/fa6";
 import BookingUpdateModal from "./BookingUpdateModal";
 import { AppointDeleteModal } from "./AppointDeleteModal";
@@ -24,7 +22,7 @@ const MyBookings = () => {
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Hydration Error প্রতিরোধ করতে মাউন্ট স্টেট
+  
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -48,24 +46,24 @@ const MyBookings = () => {
     load();
   }, [user?.id]);
 
-  // ব্রাউজারে সম্পূর্ণ মাউন্ট হওয়ার আগে লোডিং বা ফিক্সড টেক্সট দেখাবে যেন সার্ভারের সাথে মিসম্যাচ না হয়
+  
   if (!isMounted) {
     return <div className="p-6 text-slate-500 text-center">Loading your bookings...</div>;
   }
 
-  // ১. Session লোড হচ্ছে
+
   if (userData.isPending) {
     return <div className="p-6 text-slate-500 text-center">Loading your bookings...</div>;
   }
 
-  // ২. User নেই
+ 
   if (!user) {
     return <div className="p-6 text-slate-500 text-center">Please log in to see your bookings.</div>;
   }
 
-  // ৩. Bookings লোড হচ্ছে
+  
   if (loading) {
-    return <div className="p-6 text-slate-500 text-center">Loading your bookings...</div>; // এখানেও টেক্সটটি এক রাখা হলো সেফটি মার্জিন হিসেবে
+    return <div className="p-6 text-slate-500 text-center">Loading your bookings...</div>; 
   }
 
   // ৪. কোনো booking নেই
@@ -76,7 +74,7 @@ const MyBookings = () => {
 
 
   const handleUpdate = (updatedBooking) => {
-     console.log("onUpdate called with:", updatedBooking)
+     
     setBookings(prev =>
       prev.map(b => b._id === updatedBooking._id ? updatedBooking : b)
     );
@@ -84,7 +82,7 @@ const MyBookings = () => {
 
 
   const handleDeleteState = (deletedId) => {
-    console.log("onDelete called with ID:", deletedId);
+    
     setBookings(prev => prev.filter(b => b._id !== deletedId));
   };
 

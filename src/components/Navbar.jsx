@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { authClient, useSession } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
+import { Avatar } from "@heroui/react";
 
 // ✅ Demo user state — replace with real auth (NextAuth / Firebase / JWT etc.)
 const DEMO_USER = null; // Set to { name: "Rafi", image: "/avatar.jpg" } to test logged-in state
@@ -13,18 +14,18 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
 
 
-    const userData = authClient.useSession();
-    const user = userData.data?.user;
-    console.log(user);
-    
-  
+  const userData = authClient.useSession();
+  const user = userData.data?.user;
+  console.log(user);
+
+
 
 
 
   const handleSingout = async () => {
-        await authClient.signOut();
-        
-    }
+    await authClient.signOut();
+
+  }
 
 
 
@@ -43,11 +44,10 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
           ? "bg-white/95 backdrop-blur-md shadow-lg border-b border-teal-100"
           : "bg-transparent"
-      }`}
+        }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
@@ -70,11 +70,10 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
-                  link.private
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${link.private
                     ? "text-teal-700 bg-teal-50 hover:bg-teal-100"
                     : "text-gray-600 hover:text-teal-700 hover:bg-teal-50"
-                }`}
+                  }`}
               >
                 {link.label}
               </Link>
@@ -87,12 +86,16 @@ export default function Navbar() {
               /* Logged In */
               <div className="flex items-center gap-3">
                 <div className="flex items-center gap-2 bg-gray-50 rounded-full pl-1 pr-3 py-1 border border-gray-200">
-                  <img
-                    src={user.image || "https://i.pravatar.cc/40"}
+                  {/* <img
+                    src={user.image }
                     alt={user.name}
                     className="w-8 h-8 rounded-full object-cover"
                   />
-                  <span className="text-sm font-medium text-gray-700">{user.name}</span>
+                  <span className="text-sm font-medium text-gray-700">{user.name}</span> */}
+                  <Avatar>
+                    <Avatar.Image alt={user.name} src={user.image } />
+                    <Avatar.Fallback>{user.name.charAt(0)}</Avatar.Fallback>
+                  </Avatar>
                 </div>
                 <button
                   onClick={handleSingout}

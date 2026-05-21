@@ -1,5 +1,7 @@
 import { ModalComponent } from "@/components/Modal";
 import { doctorsData } from "@/data/data";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 import { 
   FaBuildingHospital, 
   FaCalendarCheck, 
@@ -14,14 +16,18 @@ const appointmentsDetialsPage = async ({params}) => {
 
 
     const { id } = await params;
-        console.log(id);
+    
+    const {token} = await auth.api.getToken({
+        headers: await headers()
+    })
+    console.log(token);
         
     
         const doctors = await doctorsData(id);
     
        
         const doctor = doctors.find(doc => doc._id === id);
-        console.log("Doctor Details:", doctor);
+        
 
 
     return (

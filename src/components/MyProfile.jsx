@@ -1,12 +1,13 @@
 import React from "react";
 import { authClient } from "@/lib/auth-client";
-import { FaEnvelope, FaPen } from "react-icons/fa6";
+import { FaEnvelope} from "react-icons/fa6";
 import { Avatar } from "@heroui/react";
+import { ProfileUpdateModal } from "./ProfileUpdateModal";
 
 const MyProfile = () => {
   const userData = authClient.useSession();
   const user = userData.data?.user;
-  console.log(user);
+ 
 
 
   const handleUpdateProfile = () => {
@@ -25,7 +26,9 @@ const MyProfile = () => {
 
           <div className="h-20 w-20 shrink-0 rounded-full p-1 border-2 border-cyan-100/70 bg-gradient-to-tr from-cyan-50 to-white shadow-inner overflow-hidden flex items-center justify-center">
             <Avatar>
-              <Avatar.Image alt="John Doe" src={user?.image} />
+              <Avatar.Image 
+              alt={user?.name} 
+              src={user?.image} />
               <Avatar.Fallback>{user?.name?.charAt(0)}</Avatar.Fallback>
             </Avatar>
           </div>
@@ -49,13 +52,7 @@ const MyProfile = () => {
         </div>
 
         {/* আপডেট প্রোফাইল অ্যাকশন বাটন (ছবির মতো চওড়া এবং সায়ান-গ্রিন কালার) */}
-        <button
-          onClick={handleUpdateProfile}
-          className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-[#00a896] hover:bg-[#009485] py-3 text-sm font-bold text-white shadow-xs transition duration-200 active:scale-98 cursor-pointer"
-        >
-          <FaPen className="text-xs" />
-          Update Profile
-        </button>
+        <ProfileUpdateModal user={user} />
 
       </div>
 

@@ -164,7 +164,7 @@ const BookingUpdateModal = ({ booking, onUpdate }) => {
 
                                         {/* Submit Button */}
                                         <Button
-                                            type="submit" // 🎯 slot="close" ফেলে দেওয়া হয়েছে যেন সাবমিট প্রসেস বাধাগ্রস্ত না হয়
+                                            type="submit" 
                                             className="w-full bg-[#00b2b2] hover:bg-[#009999] text-white font-bold py-3 rounded-xl transition-colors mt-2 shadow-sm text-base h-12"
                                         >
                                             Save Changes
