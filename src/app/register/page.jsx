@@ -13,7 +13,14 @@ const RegisterPage = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const googlelogin = async () => {
-    await authClient.signIn.social({ provider: "google" });
+    const { error } = await authClient.signIn.social({
+            provider: "google",
+            callbackURL: "/",
+        });
+
+        if (error) {
+            toast.error(error.message);
+        }
   };
 
   const handleSubmit = async (e) => {

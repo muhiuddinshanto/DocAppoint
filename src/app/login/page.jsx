@@ -24,7 +24,14 @@ const LoginPage = () => {
   };
 
   const googlelogin = async () => {
-    await authClient.signIn.social({ provider: "google" });
+    const { error } = await authClient.signIn.social({
+      provider: "google",
+      callbackURL: "/",
+    });
+
+    if (error) {
+      toast.error(error.message);
+    }
   };
 
   return (
