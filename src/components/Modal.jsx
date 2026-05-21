@@ -8,9 +8,12 @@ import { FaCalendarCheck } from "react-icons/fa6";
 export function ModalComponent({ doctor }) {
   const userData = authClient.useSession();
   const user = userData.data?.user;
-  
-  
-  
+
+  const labelClass = "text-xs font-semibold text-slate-700 dark:text-slate-200";
+  const inputClass =
+    "w-full rounded-xl border border-slate-200 bg-white px-3 py-1.5 text-xs text-slate-800 outline-none transition focus:border-teal-500 dark:border-white/10 dark:bg-slate-800 dark:text-white dark:placeholder:text-slate-500";
+  const readonlyClass =
+    "w-full cursor-not-allowed rounded-xl border border-slate-100 bg-slate-50 px-3 py-1.5 text-xs text-slate-500 outline-none dark:border-white/10 dark:bg-slate-800/70 dark:text-slate-300";
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -59,59 +62,54 @@ export function ModalComponent({ doctor }) {
         </button>
       </Modal.Trigger>
 
-      {/* Modal Content */}
       <Modal.Backdrop>
         <Modal.Container>
-          <Modal.Dialog className="sm:max-w-md w-full rounded-3xl p-5 bg-white shadow-xl overflow-hidden my-auto">
-            <Modal.CloseTrigger className="text-slate-400 hover:text-slate-600 transition" />
+          <Modal.Dialog className="my-auto w-full rounded-3xl border border-slate-200 bg-white p-5 shadow-xl dark:border-white/10 dark:bg-slate-900 sm:max-w-md">
+            <Modal.CloseTrigger className="text-slate-400 transition hover:text-slate-600 dark:hover:text-white" />
             
             <Modal.Header className="flex flex-col gap-0 pb-2">
-              <Modal.Heading className="text-lg font-bold text-slate-800">Book Appointment</Modal.Heading>
-              <p className="text-xs text-slate-400 font-normal">
-                with {doctor?.name || "Dr. Shafiqur Rahman"}
+              <Modal.Heading className="text-lg font-bold text-slate-800 dark:text-white">Book Appointment</Modal.Heading>
+              <p className="text-xs font-normal text-slate-400 dark:text-slate-400">
+                with {doctor?.name}
               </p>
             </Modal.Header>
             
             <Modal.Body className="p-0 overflow-visible">
               <form className="flex flex-col gap-3" onSubmit={onSubmit}>
 
-                {/* User Email */}
                 <div className="flex flex-col gap-1">
-                  <Label className="text-xs font-semibold text-slate-700">User Email</Label>
+                  <Label className={labelClass}>User Email</Label>
                   <Input
-                    className="w-full border border-slate-100 bg-slate-50 text-slate-500 rounded-xl px-3 py-1.5 outline-none cursor-not-allowed text-xs"
-                    value={user?.email || "dmxxtremet20@gmail.com"}
+                    className={readonlyClass}
+                    value={user?.email || ""}
                     readOnly
                   />
                 </div>
 
-                {/* Doctor Name */}
                 <div className="flex flex-col gap-1">
-                  <Label className="text-xs font-semibold text-slate-700">Doctor Name</Label>
+                  <Label className={labelClass}>Doctor Name</Label>
                   <Input
-                    className="w-full border border-slate-100 bg-slate-50 text-slate-500 rounded-xl px-3 py-1.5 outline-none cursor-not-allowed text-xs"
-                    value={doctor?.name || "Dr. Shafiqur Rahman"}
+                    className={readonlyClass}
+                    value={doctor?.name || ""}
                     readOnly
                   />
                 </div>
 
-                {/* Patient Name -> আসল ইনপুট ট্যাগে name="patientName" দেওয়া হয়েছে */}
                 <TextField isRequired className="w-full flex flex-col gap-1" type="text">
-                  <Label className="text-xs font-semibold text-slate-700">Patient Name *</Label>
+                  <Label className={labelClass}>Patient Name *</Label>
                   <Input 
                     name="patientName" 
                     placeholder="Full name" 
-                    className="w-full border border-slate-200 rounded-xl px-3 py-1.5 text-slate-800 focus:border-[#00a896] transition outline-none text-xs h-9" 
+                    className={`${inputClass} h-9`}
                   />
                 </TextField>
 
-                {/* Gender & Phone */}
                 <div className="grid grid-cols-2 gap-3">
                   <div className="flex flex-col gap-1">
-                    <Label className="text-xs font-semibold text-slate-700">Gender *</Label>
+                    <Label className={labelClass}>Gender *</Label>
                     <select
                       name="gender"
-                      className="w-full border border-slate-200 rounded-xl px-3 py-1.5 bg-white text-slate-800 focus:border-[#00a896] transition outline-none text-xs h-9"
+                      className={`${inputClass} h-9`}
                       defaultValue="Male"
                     >
                       <option value="Male">Male</option>
@@ -120,33 +118,30 @@ export function ModalComponent({ doctor }) {
                     </select>
                   </div>
 
-                  {/* Phone -> আসল ইনপুট ট্যাগে name="phone" দেওয়া হয়েছে */}
                   <TextField isRequired className="w-full flex flex-col gap-1" type="tel">
-                    <Label className="text-xs font-semibold text-slate-700">Phone *</Label>
+                    <Label className={labelClass}>Phone *</Label>
                     <Input 
                       name="phone" 
                       placeholder="01XXXXXXXXX" 
-                      className="w-full border border-slate-200 rounded-xl px-3 py-1.5 text-slate-800 focus:border-[#00a896] transition outline-none text-xs h-9" 
+                      className={`${inputClass} h-9`}
                     />
                   </TextField>
                 </div>
 
-                {/* Date & Time */}
                 <div className="grid grid-cols-2 gap-3">
-                  {/* Date -> আসল ইনপুট ট্যাগে name="appointmentDate" দেওয়া হয়েছে */}
                   <TextField isRequired className="w-full flex flex-col gap-1" type="date">
-                    <Label className="text-xs font-semibold text-slate-700">Date *</Label>
+                    <Label className={labelClass}>Date *</Label>
                     <Input 
                       name="appointmentDate" 
-                      className="w-full border border-slate-200 rounded-xl px-3 py-1.5 text-slate-800 focus:border-[#00a896] transition outline-none text-xs h-9" 
+                      className={`${inputClass} h-9 dark:[color-scheme:dark]`}
                     />
                   </TextField>
 
                   <div className="flex flex-col gap-1">
-                    <Label className="text-xs font-semibold text-slate-700">Time *</Label>
+                    <Label className={labelClass}>Time *</Label>
                     <select
                       name="appointmentTime"
-                      className="w-full border border-slate-200 rounded-xl px-3 py-1.5 bg-white text-slate-800 focus:border-[#00a896] transition outline-none text-xs h-9"
+                      className={`${inputClass} h-9`}
                       defaultValue=""
                     >
                       <option value="" disabled>--:-- --</option>
@@ -162,18 +157,16 @@ export function ModalComponent({ doctor }) {
                   </div>
                 </div>
 
-                {/* Reason -> আসল ইনপুট ট্যাগে name="symptoms" দেওয়া হয়েছে */}
                 <TextField className="w-full flex flex-col gap-1">
-                  <Label className="text-xs font-semibold text-slate-700">Reason (optional)</Label>
+                  <Label className={labelClass}>Reason (optional)</Label>
                   <Input 
                     name="symptoms" 
                     placeholder="Brief reason for visit" 
-                    className="w-full border border-slate-200 rounded-xl px-3 py-1.5 text-slate-800 focus:border-[#00a896] transition outline-none text-xs h-9" 
+                    className={`${inputClass} h-9`}
                   />
                 </TextField>
 
-                {/* Confirm Booking Button */}
-                <Button slot="close" type="submit" className="w-full bg-[#00a896] text-white font-bold py-2.5 rounded-xl hover:bg-[#009485] transition mt-2 shadow-sm text-sm h-10">
+                <Button slot="close" type="submit" className="mt-2 h-10 w-full rounded-xl bg-teal-600 py-2.5 text-sm font-bold text-white shadow-sm transition hover:bg-teal-700">
                   Confirm Booking
                 </Button>
 

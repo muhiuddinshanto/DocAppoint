@@ -1,38 +1,37 @@
 import Link from "next/link";
+import { FaArrowRight, FaCalendarCheck } from "react-icons/fa6";
 
 export default function CTASection() {
   return (
-    <section className="py-20 lg:py-28 bg-white">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="relative bg-gradient-to-br from-teal-600 via-teal-600 to-cyan-600 rounded-3xl p-12 lg:p-16 text-center overflow-hidden shadow-2xl shadow-teal-200">
-
-          {/* Decorative circles */}
-          <div className="absolute -top-16 -right-16 w-64 h-64 bg-white/10 rounded-full" />
-          <div className="absolute -bottom-12 -left-12 w-48 h-48 bg-white/5 rounded-full" />
-          <div className="absolute top-8 left-8 w-16 h-16 bg-white/10 rounded-full" />
-
-          <div className="relative z-10 space-y-6">
-            <h2 className="text-4xl lg:text-5xl font-black text-white tracking-tight">
-              Book Your Appointment
-              <span className="block text-cyan-200">Today!</span>
+    <section className="bg-white px-4 py-16 dark:bg-slate-950 sm:px-6 lg:px-8 lg:py-24">
+      <div className="mx-auto max-w-5xl overflow-hidden rounded-[2rem] bg-slate-950 p-8 shadow-2xl shadow-teal-900/10 dark:border dark:border-white/10 sm:p-12 lg:p-16">
+        <div className="grid items-center gap-8 lg:grid-cols-[1fr_auto]">
+          <div>
+            <span className="inline-flex items-center gap-2 rounded-full bg-teal-400/10 px-4 py-2 text-xs font-black uppercase text-teal-200">
+              <FaCalendarCheck />
+              Ready when you are
+            </span>
+            <h2 className="mt-5 text-3xl font-black tracking-tight text-white sm:text-4xl lg:text-5xl">
+              Book your next appointment today.
             </h2>
-            <p className="text-teal-100 text-lg max-w-xl mx-auto leading-relaxed">
-              Don&apos;t wait — your health can&apos;t afford delays. Connect with a top doctor in minutes.
+            <p className="mt-4 max-w-2xl text-base font-medium leading-7 text-slate-300">
+              Pick a doctor, choose a time, and confirm your visit from your phone or desktop.
             </p>
-            <div className="flex flex-wrap justify-center gap-4 pt-2">
-              <Link
-                href="/appointments"
-                className="px-8 py-4 bg-white text-teal-700 font-bold text-sm rounded-xl hover:bg-teal-50 transition-colors shadow-lg"
-              >
-                Get Started — It&apos;s Free
-              </Link>
-              <Link
-                href="/appointments"
-                className="px-8 py-4 bg-white/10 border border-white/30 text-white font-bold text-sm rounded-xl hover:bg-white/20 transition-colors backdrop-blur-sm"
-              >
-                Browse Doctors
-              </Link>
-            </div>
+          </div>
+          <div className="flex flex-col gap-3 sm:flex-row lg:flex-col">
+            <Link
+              href="/appointments"
+              className="inline-flex items-center justify-center gap-2 rounded-xl bg-white px-6 py-3.5 text-sm font-black text-slate-950 transition hover:bg-teal-50"
+            >
+              Get Started
+              <FaArrowRight />
+            </Link>
+            <Link
+              href="/appointments"
+              className="inline-flex items-center justify-center rounded-xl border border-white/20 px-6 py-3.5 text-sm font-black text-white transition hover:bg-white/10"
+            >
+              Browse Doctors
+            </Link>
           </div>
         </div>
       </div>

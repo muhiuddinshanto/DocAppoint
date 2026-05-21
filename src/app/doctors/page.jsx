@@ -1,6 +1,6 @@
 import React from 'react';
 
-const page = () => {
+const DoctorPage = () => {
     return (
         <div>
             NoT Found
@@ -8,4 +8,4 @@ const page = () => {
     );
 };
 
-export default page;
+export default DoctorPage;

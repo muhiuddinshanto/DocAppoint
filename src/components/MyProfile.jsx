@@ -1,61 +1,37 @@
 import React from "react";
 import { authClient } from "@/lib/auth-client";
-import { FaEnvelope} from "react-icons/fa6";
-import { Avatar } from "@heroui/react";
+import { FaEnvelope } from "react-icons/fa6";
 import { ProfileUpdateModal } from "./ProfileUpdateModal";
 
 const MyProfile = () => {
   const userData = authClient.useSession();
   const user = userData.data?.user;
- 
-
-
-  const handleUpdateProfile = () => {
-    console.log("Update Profile Clicked");
-  };
 
   return (
-    <div className="p-6 max-w-7xl mx-auto flex justify-center items-center min-h-[300px]">
-
-
-      <div className="w-full max-w-md bg-white rounded-[28px] p-6 border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.02)] flex flex-col gap-6">
-
-
+    <div className="mx-auto flex min-h-[300px] max-w-7xl items-center justify-center">
+      <div className="flex w-full max-w-md flex-col gap-6 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-slate-900">
         <div className="flex items-center gap-5">
+          {user?.image ? (
+            <img src={user.image} alt={user?.name || "User"} className="h-20 w-20 shrink-0 rounded-full object-cover ring-4 ring-teal-100 dark:ring-teal-400/10" />
+          ) : (
+            <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-full bg-teal-100 text-2xl font-black text-teal-700 dark:bg-teal-400/10 dark:text-teal-200">
+              {user?.name?.charAt(0) || "U"}
+            </div>
+          )}
 
-
-          <div className="h-20 w-20 shrink-0 rounded-full p-1 border-2 border-cyan-100/70 bg-gradient-to-tr from-cyan-50 to-white shadow-inner overflow-hidden flex items-center justify-center">
-            <Avatar>
-              <Avatar.Image 
-              alt={user?.name} 
-              src={user?.image} />
-              <Avatar.Fallback>{user?.name?.charAt(0)}</Avatar.Fallback>
-            </Avatar>
-          </div>
-
-          {/* নাম এবং ইমেইল কন্টেন্ট */}
-          <div className="flex flex-col gap-1">
-            {/* ইউজার নাম */}
-            <h2 className="text-xl font-bold text-slate-900 tracking-tight leading-none">
-              {user?.name}
+          <div className="min-w-0 flex-1">
+            <h2 className="truncate text-xl font-black tracking-tight text-slate-950 dark:text-white">
+              {user?.name || "User"}
             </h2>
-
-            {/* ইউজার ইমেইল (আইকন সহ হালকা গ্রে কালার) */}
-            <div className="flex items-center gap-2 text-slate-500 text-[14px] mt-1">
-              <FaEnvelope className="text-slate-400 text-xs shrink-0" />
-              <span className="font-normal break-all">
-                {user?.email}
-              </span>
+            <div className="mt-2 flex items-center gap-2 text-sm font-medium text-slate-500 dark:text-slate-300">
+              <FaEnvelope className="shrink-0 text-slate-400" />
+              <span className="break-all">{user?.email}</span>
             </div>
           </div>
-
         </div>
 
-        {/* আপডেট প্রোফাইল অ্যাকশন বাটন (ছবির মতো চওড়া এবং সায়ান-গ্রিন কালার) */}
         <ProfileUpdateModal user={user} />
-
       </div>
-
     </div>
   );
 };

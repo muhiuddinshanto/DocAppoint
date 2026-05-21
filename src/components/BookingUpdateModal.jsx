@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Button, Input, Label, Modal, Surface, TextField } from "@heroui/react";
 import { FaPen } from "react-icons/fa6";
 import toast from "react-hot-toast";
@@ -8,12 +8,7 @@ import toast from "react-hot-toast";
 
 const BookingUpdateModal = ({ booking, onUpdate }) => {
 
-    const [isMounted, setIsMounted] = useState(false);
     const [isOpen, setIsOpen] = useState(false); 
-
-    useEffect(() => {
-        setIsMounted(true);
-    }, []);
 
    
     const convertTo12Hour = (time24) => {
@@ -74,8 +69,6 @@ const BookingUpdateModal = ({ booking, onUpdate }) => {
     };
 
     const defaultTimeValue = convertTo24Hour(booking?.appointmentTime);
-
-    if (!isMounted) return null;
 
     return (
         <>
