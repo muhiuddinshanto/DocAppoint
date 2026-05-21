@@ -3,44 +3,17 @@ import DoctorCard from "./shared/DoctorCard";
 import { doctorsData } from "@/data/data";
 
 
-// ─── Static demo data — replace with real API fetch ───
-const TOP_DOCTORS = [
-  {
-    id: 1,
-    name: "Dr. Sarah Ahmed",
-    specialty: "Cardiologist",
-    rating: 4.9,
-    reviews: 214,
-    experience: "12 years",
-    image: "https://i.pravatar.cc/300?img=47",
-    available: true,
-  },
-  {
-    id: 2,
-    name: "Dr. Rafiq Hassan",
-    specialty: "Neurologist",
-    rating: 4.8,
-    reviews: 189,
-    experience: "10 years",
-    image: "https://i.pravatar.cc/300?img=12",
-    available: true,
-  },
-  {
-    id: 3,
-    name: "Dr. Nadia Hossain",
-    specialty: "Pediatrician",
-    rating: 4.8,
-    reviews: 167,
-    experience: "8 years",
-    image: "https://i.pravatar.cc/300?img=23",
-    available: false,
-  },
-];
 
 const Topdoctorssection = async () => {
 
-  const doctors = await doctorsData();
-  console.log(doctors);
+
+
+  const allDoctors = await doctorsData(); 
+  
+
+  const doctors = allDoctors
+    .sort((a, b) => b.rating - a.rating) 
+    .slice(0, 3);
   
 
   return (

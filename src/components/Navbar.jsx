@@ -4,6 +4,7 @@ import Link from "next/link";
 import { authClient, useSession } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
 import { Avatar } from "@heroui/react";
+import toast from "react-hot-toast";
 
 // ✅ Demo user state — replace with real auth (NextAuth / Firebase / JWT etc.)
 const DEMO_USER = null; // Set to { name: "Rafi", image: "/avatar.jpg" } to test logged-in state
@@ -24,6 +25,7 @@ export default function Navbar() {
 
   const handleSingout = async () => {
     await authClient.signOut();
+    toast.success("Logged out successfully!");
 
   }
 

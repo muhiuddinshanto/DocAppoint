@@ -6,7 +6,7 @@ return data;
    
 };
 
-export const doctorsDataById = async (id) => {
+export const doctorsDataById = async (id, token) => {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API}/doctors/${id}`, { cache: "no-store",
          headers: {
             authorization: `Bearer ${token}`

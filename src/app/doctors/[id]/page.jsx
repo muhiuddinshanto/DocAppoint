@@ -10,18 +10,38 @@ import {
 } from "react-icons/fa6";
 import { TbBuildingHospital } from "react-icons/tb";
 
+
+
+
+export async function generateMetadata({ params }) {
+    const { id } = await params;
+    const doctormeta = await doctorsData(id);
+    const doctor = doctormeta.find(doc => doc._id === id);
+    
+
+    return {
+        title: `${doctor?.name} | DocTime`,
+        description: doctor?.description?.slice(0, 160),
+    };
+}
+
+
+
+
+
+
 const doctorsDetialsPage = async ({params}) => {
 
 
     const { id } = await params;
-        console.log(id);
+
         
     
         const doctors = await doctorsData(id);
     
        
         const doctor = doctors.find(doc => doc._id === id);
-        console.log("Doctor Details:", doctor);
+
 
 
     return (

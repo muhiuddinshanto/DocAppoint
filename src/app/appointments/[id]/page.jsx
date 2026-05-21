@@ -23,7 +23,7 @@ const appointmentsDetialsPage = async ({params}) => {
     console.log(token);
         
     
-        const doctors = await doctorsData(id);
+        const doctors = await doctorsData(id,);
     
        
         const doctor = doctors.find(doc => doc._id === id);
