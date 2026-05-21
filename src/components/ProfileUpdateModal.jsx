@@ -68,7 +68,7 @@ export function ProfileUpdateModal({ user }) {
                                             <Input />
                                         </TextField>
                                         
-                                        {/* Photo URL Input */}
+                                        
                                         <TextField
                                             defaultValue={user?.image || ""}
                                             className="w-full" 
