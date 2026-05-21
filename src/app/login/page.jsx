@@ -1,22 +1,23 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { Button, FieldError, Form, Input, Label, TextField } from "@heroui/react";
 import { authClient } from "@/lib/auth-client";
 import toast from "react-hot-toast";
 import { FaStethoscope } from "react-icons/fa6";
 
-
-
-
-
-
-
-
 const LoginPage = () => {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleForgot = () => {
+    toast.error('Forgot password is not ready for this demo');
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
+    
     const formData = new FormData(e.currentTarget);
     const user = Object.fromEntries(formData.entries());
 
@@ -26,11 +27,18 @@ const LoginPage = () => {
       callbackURL: "/",
     });
 
-    if (error) toast.error(`Login failed: ${error.message}`);
-    if (data) toast.success("Login successful! Redirecting to homepage...");
+    setIsLoading(false);
+
+    if (error) {
+      toast.error(`Login failed: ${error.message}`);
+    }
+    if (data) {
+      toast.success("Login successful! Redirecting to homepage...");
+    }
   };
 
   const googlelogin = async () => {
+    setIsLoading(true);
     const { error } = await authClient.signIn.social({
       provider: "google",
       callbackURL: "/",
@@ -39,6 +47,7 @@ const LoginPage = () => {
     if (error) {
       toast.error(error.message);
     }
+    setIsLoading(false);
   };
 
   return (
@@ -55,18 +64,38 @@ const LoginPage = () => {
         <Form className="flex flex-col gap-4" onSubmit={handleSubmit}>
           <TextField isRequired name="email" type="email" className="flex flex-col gap-1.5">
             <Label className="text-sm font-bold text-slate-700 dark:text-slate-200">Email</Label>
-            <Input className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-slate-800 outline-none transition focus:border-teal-500 dark:border-white/10 dark:bg-white/5 dark:text-white" />
+            <Input 
+              placeholder="you@example.com"
+              className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-slate-800 outline-none transition focus:border-teal-500 dark:border-white/10 dark:bg-white/5 dark:text-white" 
+            />
             <FieldError className="text-xs text-red-500" />
           </TextField>
 
           <TextField isRequired name="password" type="password" className="flex flex-col gap-1.5">
-            <Label className="text-sm font-bold text-slate-700 dark:text-slate-200">Password</Label>
-            <Input className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-slate-800 outline-none transition focus:border-teal-500 dark:border-white/10 dark:bg-white/5 dark:text-white" />
+            <div className="flex items-center justify-between">
+              <Label className="text-sm font-bold text-slate-700 dark:text-slate-200">Password</Label>
+              <button
+                type="button"
+                onClick={handleForgot}
+                className="text-xs font-bold text-teal-600 hover:underline dark:text-teal-400"
+              >
+                Forgot Password?
+              </button>
+            </div>
+            <Input 
+              placeholder="Enter your password"
+              className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-slate-800 outline-none transition focus:border-teal-500 dark:border-white/10 dark:bg-white/5 dark:text-white" 
+            />
             <FieldError className="text-xs text-red-500" />
           </TextField>
 
-          <Button type="submit" className="mt-2 w-full rounded-xl bg-teal-600 py-3 font-black text-white shadow-sm transition hover:bg-teal-700">
-            Login
+          <Button 
+            type="submit" 
+            isLoading={isLoading}
+            disabled={isLoading}
+            className="mt-2 w-full rounded-xl bg-teal-600 py-3 font-black text-white shadow-sm transition hover:bg-teal-700 disabled:opacity-70"
+          >
+            {isLoading ? "Logging in..." : "Login"}
           </Button>
         </Form>
 
@@ -77,9 +106,11 @@ const LoginPage = () => {
         </div>
 
         <Button
+          type="button"
           onClick={googlelogin}
+          disabled={isLoading}
           variant="secondary"
-          className="flex w-full items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white py-3 font-black text-slate-700 transition hover:bg-slate-50 dark:border-white/10 dark:bg-white/5 dark:text-slate-200"
+          className="flex w-full items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white py-3 font-black text-slate-700 transition hover:bg-slate-50 dark:border-white/10 dark:bg-white/5 dark:text-slate-200 dark:hover:bg-white/10 disabled:opacity-70"
         >
           <svg className="h-5 w-5" viewBox="0 0 24 24">
             <path

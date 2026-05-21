@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { Button, FieldError, Form, Input, Label, TextField } from "@heroui/react";
 import { authClient } from "@/lib/auth-client";
@@ -8,43 +8,70 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { FaStethoscope } from "react-icons/fa6";
 
-
-
-
-
-
-
 const RegisterPage = () => {
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
+  const [passwordError, setPasswordError] = useState("");
+
+  // পাসওয়ার্ড ভ্যালিডেশন ফাংশন
+  const validatePassword = (password) => {
+    const hasUppercase = /[A-Z]/.test(password);
+    const hasLowercase = /[a-z]/.test(password);
+    const minLength = password.length >= 6;
+
+    if (!hasUppercase) return "Password must contain at least 1 uppercase letter";
+    if (!hasLowercase) return "Password must contain at least 1 lowercase letter";
+    if (!minLength) return "Password must be at least 6 characters";
+    return null;
+  };
 
   const googlelogin = async () => {
+    setIsLoading(true);
     const { error } = await authClient.signIn.social({
-            provider: "google",
-            callbackURL: "/",
-        });
+      provider: "google",
+      callbackURL: "/",
+    });
 
-        if (error) {
-            toast.error(error.message);
-        }
+    if (error) {
+      toast.error(error.message);
+    }
+    setIsLoading(false);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
     const formData = new FormData(e.currentTarget);
     const user = Object.fromEntries(formData.entries());
+
+    // পাসওয়ার্ড ভ্যালিডেশন চেক
+    const passwordValidationError = validatePassword(user.password);
+    if (passwordValidationError) {
+      setPasswordError(passwordValidationError);
+      toast.error(passwordValidationError);
+      return;
+    }
+    setPasswordError("");
+
+    setIsLoading(true);
 
     const { data, error } = await authClient.signUp.email({
       email: user.email,
       password: user.password,
       name: user.name,
       image: user.photoUrl || null,
-      callbackURL: "/",
+      callbackURL: "/login",
     });
 
-    if (error) toast.error(`Registration failed: ${error.message}`);
+    setIsLoading(false);
+
+    if (error) {
+      toast.error(`Registration failed: ${error.message}`);
+    }
+    
     if (data) {
-      toast.success("Registration successful!");
-      router.push("/");
+      toast.success("Registration successful! Please login to continue.");
+      router.push("/login");
     }
   };
 
@@ -60,21 +87,60 @@ const RegisterPage = () => {
         </div>
 
         <Form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-          {[
-            { name: "name", label: "Name", type: "text", required: true },
-            { name: "email", label: "Email", type: "email", required: true },
-            { name: "photoUrl", label: "Photo URL", type: "url", required: false },
-            { name: "password", label: "Password", type: "password", required: true },
-          ].map((field) => (
-            <TextField key={field.name} isRequired={field.required} name={field.name} type={field.type} className="flex flex-col gap-1.5">
-              <Label className="text-sm font-bold text-slate-700 dark:text-slate-200">{field.label}</Label>
-              <Input className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-slate-800 outline-none transition focus:border-teal-500 dark:border-white/10 dark:bg-white/5 dark:text-white" />
-              <FieldError className="text-xs text-red-500" />
-            </TextField>
-          ))}
+          {/* Name Field */}
+          <TextField isRequired name="name" type="text" className="flex flex-col gap-1.5">
+            <Label className="text-sm font-bold text-slate-700 dark:text-slate-200">Name</Label>
+            <Input 
+              placeholder="Enter your full name"
+              className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-slate-800 outline-none transition focus:border-teal-500 dark:border-white/10 dark:bg-white/5 dark:text-white" 
+            />
+            <FieldError className="text-xs text-red-500" />
+          </TextField>
 
-          <Button type="submit" className="mt-2 w-full rounded-xl bg-teal-600 py-3 font-black text-white shadow-sm transition hover:bg-teal-700">
-            Register
+          {/* Email Field */}
+          <TextField isRequired name="email" type="email" className="flex flex-col gap-1.5">
+            <Label className="text-sm font-bold text-slate-700 dark:text-slate-200">Email</Label>
+            <Input 
+              placeholder="you@example.com"
+              className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-slate-800 outline-none transition focus:border-teal-500 dark:border-white/10 dark:bg-white/5 dark:text-white" 
+            />
+            <FieldError className="text-xs text-red-500" />
+          </TextField>
+
+          {/* Photo URL Field (Optional) */}
+          <TextField name="photoUrl" type="url" className="flex flex-col gap-1.5">
+            <Label className="text-sm font-bold text-slate-700 dark:text-slate-200">Photo URL (Optional)</Label>
+            <Input 
+              placeholder="https://example.com/photo.jpg"
+              className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-slate-800 outline-none transition focus:border-teal-500 dark:border-white/10 dark:bg-white/5 dark:text-white" 
+            />
+            <FieldError className="text-xs text-red-500" />
+          </TextField>
+
+          {/* Password Field with Validation Hint */}
+          <TextField isRequired name="password" type="password" className="flex flex-col gap-1.5">
+            <Label className="text-sm font-bold text-slate-700 dark:text-slate-200">Password</Label>
+            <Input 
+              placeholder="Enter your password"
+              className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-slate-800 outline-none transition focus:border-teal-500 dark:border-white/10 dark:bg-white/5 dark:text-white" 
+            />
+            <FieldError className="text-xs text-red-500" />
+            {/* Password Hint - always visible */}
+            <p className="text-xs text-slate-400 dark:text-slate-500 mt-1">
+              Must contain: 1 uppercase letter, 1 lowercase letter, minimum 6 characters
+            </p>
+            {passwordError && (
+              <p className="text-xs text-red-500 mt-1">{passwordError}</p>
+            )}
+          </TextField>
+
+          <Button 
+            type="submit" 
+            isLoading={isLoading}
+            disabled={isLoading}
+            className="mt-2 w-full rounded-xl bg-teal-600 py-3 font-black text-white shadow-sm transition hover:bg-teal-700 disabled:opacity-70"
+          >
+            {isLoading ? "Creating Account..." : "Register"}
           </Button>
         </Form>
 
@@ -85,10 +151,11 @@ const RegisterPage = () => {
         </div>
 
         <Button
-        type="button"
+          type="button"
           onClick={googlelogin}
+          disabled={isLoading}
           variant="secondary"
-          className="flex w-full items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white py-3 font-black text-slate-700 transition hover:bg-slate-50 dark:border-white/10 dark:bg-white/5 dark:text-slate-200"
+          className="flex w-full items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white py-3 font-black text-slate-700 transition hover:bg-slate-50 dark:border-white/10 dark:bg-white/5 dark:text-slate-200 dark:hover:bg-white/10 disabled:opacity-70"
         >
           <svg className="h-5 w-5" viewBox="0 0 24 24">
             <path
