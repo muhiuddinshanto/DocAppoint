@@ -11,10 +11,6 @@ import { FaStethoscope } from "react-icons/fa6";
 
 
 
-export const metadata = {
-  title: "Register - Book Doctor Appointments",
-  description: "Create an account to find and book appointments with qualified doctors",
-};
 
 
 

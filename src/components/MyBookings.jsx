@@ -91,7 +91,7 @@ const MyBookings = () => {
       <h1 className="mb-6 text-2xl font-black tracking-tight text-slate-950 dark:text-white">My Bookings</h1>
 
       <div className="grid gap-5 md:grid-cols-2">
-        {bookings.map((booking) => (
+        {bookings?.map((booking) => (
           <div
             key={booking._id}
             className="flex flex-col justify-between rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:shadow-md dark:border-white/10 dark:bg-slate-900"
