@@ -7,6 +7,16 @@ import { authClient } from "@/lib/auth-client";
 import toast from "react-hot-toast";
 import { FaStethoscope } from "react-icons/fa6";
 
+
+export const metadata = {
+  title: "Login - Book Doctor Appointments",
+  description: "Sign in to your account to find and book appointments with qualified doctors",
+};
+
+
+
+
+
 const LoginPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();

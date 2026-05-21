@@ -1,36 +1,127 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<div align="center">
 
-## Getting Started
+# 🩺 DocTime
 
-First, run the development server:
+**A modern full-stack doctor appointment booking platform**
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+DocTime lets patients browse doctors, view profiles, book appointments, and authenticate securely — all in one clean, responsive interface.
+
+</div>
+
+---
+
+## ✨ Features
+
+### 🔐 Authentication
+- Email & password login / registration
+- Google OAuth
+- JWT-based session management via **Better Auth**
+- Middleware-protected routes with automatic redirect
+
+### 👨‍⚕️ Doctors
+- Browse all doctors with card-based layout
+- Search by name or specialty (MongoDB regex)
+- Detailed doctor profile pages with dynamic SEO metadata
+
+### 📅 Appointments
+- Book, update, and cancel appointments
+- View all appointments tied to the logged-in user
+
+### 👤 Profile
+- Update display name and profile photo
+- Real-time UI updates with a clean modal interface
+
+### 🎨 UI & UX
+- Fully responsive — mobile, tablet, desktop
+- Dark / Light theme toggle (persisted in localStorage)
+- Smooth animations, HeroUI modals, Swiper testimonial slider
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer | Technologies |
+|---|---|
+| **Frontend** | Next.js 16, React 19, Tailwind CSS, HeroUI, Swiper.js |
+| **Backend** | Express.js, MongoDB |
+| **Auth** | Better Auth (JWT plugin, Google OAuth, MongoDB adapter) |
+| **Utilities** | React Icons, React Hot Toast, JOSE |
+
+---
+
+## 📂 Project Structure
+
+```
+src/
+├── app/
+│   ├── login/
+│   ├── register/
+│   ├── doctors/
+│   ├── dashboard/
+│   └── profile/
+├── components/
+│   ├── Modal/
+│   ├── Navbar/
+│   ├── Testimonials/
+│   └── ProfileUpdateModal/
+├── context/
+│   └── ThemeProvider/
+├── data/
+│   └── data.js
+├── lib/
+│   ├── auth.js
+│   └── auth-client.js
+└── proxy.js
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## 🚀 Getting Started
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 1. Clone the repository
 
-## Learn More
+```bash
+git clone https://github.com/muhiuddinshanto/DocAppoint
+cd docappoint
+```
 
-To learn more about Next.js, take a look at the following resources:
+### 2. Install dependencies
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+# Frontend
+npm install
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# Backend
+cd server && npm install
+```
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 3. Run the project
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+# Frontend
+npm run dev
+
+# Backend
+nodemon index.js
+```
+
+---
+
+## 🎯 Roadmap
+
+- [ ] Payment integration
+- [ ] Video consultation
+- [ ] Admin dashboard
+- [ ] Doctor dashboard
+- [ ] Email notifications & appointment reminders
+- [ ] Real-time chat
+- [ ] Prescription system
+
+---
+
+## 👨‍💻 Author
+
+Developed with ❤️ by **MuhiuddinShanto**
+
+---

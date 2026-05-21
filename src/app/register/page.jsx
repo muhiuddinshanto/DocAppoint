@@ -8,6 +8,16 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { FaStethoscope } from "react-icons/fa6";
 
+
+
+
+export const metadata = {
+  title: "Register - Book Doctor Appointments",
+  description: "Create an account to find and book appointments with qualified doctors",
+};
+
+
+
 const RegisterPage = () => {
   const router = useRouter();
 
