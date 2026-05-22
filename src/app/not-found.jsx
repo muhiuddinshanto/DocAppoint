@@ -3,6 +3,17 @@ import React from 'react';
 import { BiHomeAlt } from 'react-icons/bi';
 import { TbHeartRateMonitor } from 'react-icons/tb'; // মেডিকেল থিমের জন্য আইকন
 
+
+export const metadata = {
+  title: "Page Not Found | DocTime",
+  description: "The medical page or service you are looking for is unavailable. Return to DocTime homepage to find doctors and manage your care.",
+  robots: {
+    index: false, 
+    follow: true,
+  },
+};
+
+
 const NotFound = () => {
     return (
         <div className="min-h-screen bg-slate-50/50 flex items-center justify-center px-6 py-12">
