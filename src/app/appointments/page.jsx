@@ -2,6 +2,38 @@ import DoctorCard from "@/components/shared/DoctorCard";
 import { appointmentsbySearch } from "@/data/data";
 import { FaMagnifyingGlass, FaSliders } from "react-icons/fa6";
 
+
+
+export async function generateMetadata({ searchParams }) {
+    const resolvedSearchParams = await searchParams;
+  const searchParam = resolvedSearchParams?.search;
+  const search = Array.isArray(searchParam) ? searchParam[0] : searchParam || "";
+    
+   
+
+
+    const pageTitle = search 
+    ? `Search results for "${search}" | DocTime` 
+    : "Book the Right Doctor | DocTime";
+
+  const pageDescription = search
+    ? `Find the best available doctors and specialists matching "${search}" on DocTime. Book your appointment easily.`
+    : "Search by doctor name, specialty, hospital, or location and choose the appointment that fits your day.";
+
+  return {
+    title: pageTitle,
+    description: pageDescription,
+  };
+}
+
+
+
+
+
+
+
+
+
 const AppointmentsPage = async ({ searchParams }) => {
   const resolvedSearchParams = await searchParams;
   const searchParam = resolvedSearchParams?.search;

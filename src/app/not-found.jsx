@@ -8,13 +8,13 @@ const NotFound = () => {
         <div className="min-h-screen bg-slate-50/50 flex items-center justify-center px-6 py-12">
             <div className="max-w-2xl w-full text-center">
 
-                {/* 404 Large Text & Pulse Animation */}
+                {/* Title */}
                 <div className="relative inline-block mb-4">
-                    {/* ব্যাকগ্রাউন্ডে বড় ৪MD টেক্সট */}
+                   {/* 404 */}
                     <h1 className="text-[130px] sm:text-[200px] font-black text-slate-200/60 leading-none select-none tracking-tighter">
                         404
                     </h1>
-                    {/* সামনে বড় টেক্সট */}
+                    
                     <div className="absolute inset-0 flex flex-col items-center justify-center mt-4">
                         <TbHeartRateMonitor className="text-4xl sm:text-5xl text-[#00a896] animate-pulse mb-2" />
                         <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-wide">
@@ -25,7 +25,7 @@ const NotFound = () => {
 
                 {/* Description */}
                 <div className="space-y-4">
-                    {/* ডেকোরেটিভ টিল বার */}
+                    
                     <div className="w-16 h-1 bg-[#00a896] mx-auto rounded-full"></div>
                     <p className="text-slate-500 max-w-md mx-auto text-base sm:text-lg leading-relaxed">
                         Sorry, the link you are looking for is not available at this time. The page may have been removed or the link was incorrect.
@@ -34,7 +34,7 @@ const NotFound = () => {
 
                 {/* Action Buttons */}
                 <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-                    {/* হোমপেজে ফিরে যাওয়ার বাটন */}
+                   
                     <Link href="/">
                         <button className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-[#00a896] hover:bg-[#009485] px-8 py-3.5 text-sm font-bold text-white shadow-xs transition duration-200 active:scale-98 cursor-pointer uppercase tracking-wider">
                             <BiHomeAlt className="text-lg" />
@@ -42,7 +42,7 @@ const NotFound = () => {
                         </button>
                     </Link>
 
-                    {/* ডক্টরদের খোঁজার বাটন (যা আপনার ডক্টর অ্যাপের জন্য পারফেক্ট) */}
+                    
                     <Link href="/appointments">
                         <button className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 px-8 py-3.5 text-sm font-bold text-slate-700 shadow-xs transition duration-200 active:scale-98 cursor-pointer uppercase tracking-wider">
                             Find Doctors
