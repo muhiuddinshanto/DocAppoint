@@ -4,7 +4,7 @@
 
 A modern full-stack doctor appointment booking system where patients can browse doctors, view details, and book appointments securely with robust authentication.
 
-[**🌐 Live Site**](https://doc-appoint-omega.vercel.app) • [**💻 Client Repo**](https://github.com/muhiuddinshanto/DocAppoint) • [**🖥️ Server Repo**](https://github.com/muhiuddinshanto/DocAppoint_server)
+[**🌐 Live Site**](https://doc-appoint-omega.vercel.app) • [**💻 Client Repo**](https://github.com/mohiuddinshanto/DocAppoint) • [**🖥️ Server Repo**](https://github.com/mohiuddinshanto/DocAppoint_server)
 
 </div>
 
@@ -68,7 +68,7 @@ src/
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/muhiuddinshanto/DocAppoint.git
+git clone https://github.com/mohiuddinshanto/DocAppoint.git
 cd DocAppoint
 ```
 
